@@ -1,7 +1,9 @@
-package com.financiai.dao;
+package dao;
 
-import com.financiai.model.entities.Cliente;
-import com.financiai.util.Conexao;
+
+import entities.Cliente;
+import util.Conexao;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,26 @@ public class ClienteDAO {
     public ClienteDAO() {
         conexao = Conexao.conectar(); // Conecta ao banco de dados
         criarTabelaClientes(); // Verifica e cria a tabela se não existir
+    }
+    // Adicione no início da classe
+    private void iniciarTransacao() throws SQLException {
+        conexao.setAutoCommit(false);
+    }
+
+    private void commit() throws SQLException {
+        conexao.commit();
+        conexao.setAutoCommit(true);
+    }
+
+    private void rollback() {
+        try {
+            if (conexao != null) {
+                conexao.rollback();
+                conexao.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro no rollback: " + e.getMessage());
+        }
     }
 
     // Método para verificar se a tabela clientes já existe
@@ -86,6 +108,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao adicionar cliente: " + e.getMessage(), e);
         }
+
     }
 
     // Método para listar todos os clientes

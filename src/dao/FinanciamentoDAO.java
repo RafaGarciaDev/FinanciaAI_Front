@@ -1,10 +1,11 @@
-package com.financiai.dao;
+package dao;
 
-import com.financiai.model.entities.Financiamento;
-import com.financiai.model.entities.Cliente;
-import com.financiai.model.entities.Imovel;
-import com.financiai.model.enums.TipoAmortizacao;
-import com.financiai.util.Conexao;
+
+import entities.Cliente;
+import entities.Financiamento;
+import entities.Imovel;
+import enums.TipoAmortizacao;
+import util.Conexao;
 
 import java.sql.*;
 import java.util.ArrayList;

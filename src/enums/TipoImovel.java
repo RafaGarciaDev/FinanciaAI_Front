@@ -1,7 +1,8 @@
-package com.financiai.model.enums;
+package enums;
 
 public enum TipoImovel {
 
-    CASA, APARTAMENTO
+    CASA,
+    APARTAMENTO
 
 }

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Financiamento</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<nav>
+    <button class="nav-btn" data-section="cliente">Clientes</button>
+    <button class="nav-btn" data-section="imovel">Imóveis</button>
+    <button class="nav-btn" data-section="simulacao">Simulação</button>
+</nav>
+
+<main>
+    <!-- Seção Cliente -->
+    <section id="cliente-section" class="content-section">
+        <h2>Cadastro de Clientes</h2>
+        <form id="form-cliente">
+            <input type="hidden" id="cliente-id">
+            <div class="form-group">
+                <label for="cliente-nome">Nome:</label>
+                <input type="text" id="cliente-nome" required>
+            </div>
+            <div class="form-group">
+                <label for="cliente-cpf">CPF:</label>
+                <input type="text" id="cliente-cpf" required>
+            </div>
+            <div class="form-group">
+                <label for="cliente-renda">Renda Mensal (R$):</label>
+                <input type="number" id="cliente-renda" min="0" step="0.01" required>
+            </div>
+            <button type="submit">Salvar</button>
+        </form>
+
+        <h3>Clientes Cadastrados</h3>
+        <table id="tabela-clientes">
+            <thead>
+            <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>Renda Mensal</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <!-- Seção Imóvel -->
+    <section id="imovel-section" class="content-section hidden">
+        <h2>Cadastro de Imóveis</h2>
+        <form id="form-imovel">
+            <input type="hidden" id="imovel-id">
+            <div class="form-group">
+                <label for="imovel-tipo">Tipo de Imóvel:</label>
+                <select id="imovel-tipo" required>
+                    <option value="">Selecione o tipo</option>
+                    <option value="CASA">Casa</option>
+                    <option value="APARTAMENTO">Apartamento</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="imovel-valor">Valor do Imóvel (R$):</label>
+                <input type="number" id="imovel-valor" min="0" step="0.01" required>
+            </div>
+            <button type="submit">Salvar</button>
+        </form>
+
+        <h3>Imóveis Cadastrados</h3>
+        <table id="tabela-imoveis">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <!-- Seção Simulação -->
+    <section id="simulacao-section" class="content-section hidden">
+        <h2>Simulação de Financiamento</h2>
+        <form id="form-simulacao">
+            <!-- Dados do Cliente -->
+            <div class="form-group">
+                <label for="simulacao-cliente">Cliente:</label>
+                <select id="simulacao-cliente" required>
+                    <option value="">Selecione um cliente</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="simulacao-cliente-nome">Nome do Cliente:</label>
+                <input type="text" id="simulacao-cliente-nome" readonly>
+            </div>
+            <div class="form-group">
+                <label for="simulacao-cliente-renda">Renda Mensal (R$):</label>
+                <input type="number" id="simulacao-cliente-renda" readonly>
+            </div>
+
+            <!-- Dados do Imóvel -->
+            <div class="form-group">
+                <label for="simulacao-tipo-imovel">Tipo de Imóvel:</label>
+                <select id="simulacao-tipo-imovel" required>
+                    <option value="">Selecione o tipo</option>
+                    <option value="CASA">Casa</option>
+                    <option value="APARTAMENTO">Apartamento</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="simulacao-valor-imovel">Valor do Imóvel (R$):</label>
+                <input type="number" id="simulacao-valor-imovel" min="0" step="0.01" required>
+            </div>
+
+            <!-- Dados do Financiamento -->
+            <div class="form-group">
+                <label for="simulacao-valor-entrada">Valor de Entrada (R$):</label>
+                <input type="number" id="simulacao-valor-entrada" min="0" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="simulacao-valor-financiado">Valor Financiado (R$):</label>
+                <input type="number" id="simulacao-valor-financiado" readonly>
+            </div>
+            <div class="form-group">
+                <label for="simulacao-taxa-juros">Taxa de Juros Anual (%):</label>
+                <input type="number" id="simulacao-taxa-juros" min="0" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="simulacao-prazo">Prazo (meses):</label>
+                <input type="number" id="simulacao-prazo" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="simulacao-sistema">Sistema de Amortização:</label>
+                <select id="simulacao-sistema" required>
+                    <option value="">Selecione o sistema</option>
+                    <option value="PRICE">Price</option>
+                    <option value="SAC">SAC</option>
+                </select>
+            </div>
+            <button type="submit">Simular e Salvar</button>
+        </form>
+
+        <div id="resultado-simulacao" class="hidden">
+            <h3>Resultado da Simulação</h3>
+            <div id="dados-simulacao">
+                <table class="result-table">
+                    <tr>
+                        <th>Campo</th>
+                        <th>Valor</th>
+                    </tr>
+                    <tr>
+                        <td>Cliente (CPF)</td>
+                        <td id="result-cliente-cpf"></td>
+                    </tr>
+                    <tr>
+                        <td>Nome do Cliente</td>
+                        <td id="result-cliente-nome"></td>
+                    </tr>
+                    <tr>
+                        <td>Renda Mensal</td>
+                        <td id="result-cliente-renda"></td>
+                    </tr>
+                    <tr>
+                        <td>Tipo de Imóvel</td>
+                        <td id="result-tipo-imovel"></td>
+                    </tr>
+                    <tr>
+                        <td>Valor do Imóvel</td>
+                        <td id="result-valor-imovel"></td>
+                    </tr>
+                    <tr>
+                        <td>Valor de Entrada</td>
+                        <td id="result-valor-entrada"></td>
+                    </tr>
+                    <tr>
+                        <td>Valor Financiado</td>
+                        <td id="result-valor-financiado"></td>
+                    </tr>
+                    <tr>
+                        <td>Taxa de Juros Anual</td>
+                        <td id="result-taxa-juros"></td>
+                    </tr>
+                    <tr>
+                        <td>Prazo (meses)</td>
+                        <td id="result-prazo"></td>
+                    </tr>
+                    <tr>
+                        <td>Sistema de Amortização</td>
+                        <td id="result-sistema"></td>
+                    </tr>
+                </table>
+            </div>
+            <button id="gerar-pdf">Gerar PDF</button>
+        </div>
+    </section>
+</main>
+
+<div id="loading" class="hidden">Carregando...</div>
+
+<!-- Scripts no final do body -->
+<script src="./app.js"></script>
+<script src="./cliente.js"></script>
+<script src="./imovel.js"></script>
+<script src="./simulacao.js"></script>
+</body>
+</html>

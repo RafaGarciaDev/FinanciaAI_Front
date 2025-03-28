@@ -1,7 +1,8 @@
-package com.financiai.dao;
+package dao;
 
-import com.financiai.model.entities.Parcelas;
-import com.financiai.util.Conexao;
+
+import entities.Parcelas;
+import util.Conexao;
 
 import java.sql.*;
 import java.text.DecimalFormat;

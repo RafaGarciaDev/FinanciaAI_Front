@@ -1,6 +1,7 @@
-package com.financiai.model.entities;
+package entities;
 
-import com.financiai.model.enums.TipoImovel;
+
+import enums.TipoImovel;
 
 public class Imovel {
 
@@ -12,6 +13,7 @@ public class Imovel {
     public Imovel(TipoImovel tipoImovel, Double valorImovel) {
         this.tipoImovel = tipoImovel;
         this.valorImovel = valorImovel;
+
     }
 
 

@@ -1,8 +1,9 @@
-package com.financiai.dao;
+package dao;
 
-import com.financiai.model.entities.Imovel;
-import com.financiai.model.enums.TipoImovel;
-import com.financiai.util.Conexao;
+
+import entities.Imovel;
+import enums.TipoImovel;
+import util.Conexao;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,10 +1,11 @@
-package com.financiai.model.entities;
+package entities;
 
-import com.financiai.model.enums.TipoAmortizacao;
+
+import enums.TipoAmortizacao;
 
 public class Financiamento {
 
-    private Double taxaJuros;
+    private double taxaJuros;
     private double valorFinanciado;
     private double valorEntrada;
     private int prazo;

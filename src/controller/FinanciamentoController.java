@@ -1,17 +1,22 @@
-package com.financiai.controller;
+package controller;
 
-import com.financiai.dao.*;
-import com.financiai.model.enums.TipoImovel;
-import com.financiai.model.entities.Cliente;
-import com.financiai.model.entities.Financiamento;
-import com.financiai.model.entities.Imovel;
-import com.financiai.model.entities.Parcelas;
-import com.financiai.model.enums.TipoAmortizacao;
-import com.financiai.services.Amortizacao;
-import com.financiai.services.Price;
-import com.financiai.services.SAC;
-import com.financiai.util.Conexao;
-import com.financiai.util.GeradorPDF;
+
+import dao.ClienteDAO;
+import dao.FinanciamentoDAO;
+import dao.ImovelDAO;
+import dao.ParcelasDAO;
+import entities.Cliente;
+import entities.Financiamento;
+import entities.Imovel;
+import entities.Parcelas;
+import enums.TipoAmortizacao;
+import enums.TipoImovel;
+import services.Amortizacao;
+import services.Price;
+import services.SAC;
+import util.Conexao;
+import util.GeradorPDF;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
